@@ -1,8 +1,16 @@
 :root {
-    // Default layout
-    --default-layout-header-height: 60px;
-    --default-layout-width: 1150px;
-    --default-layout-horizontal-spacer: 24px;
+    --black: #000;
+    --white: #ffffff;
+    --text-color: #ffffff;
+    --panel-gap: 8px;
+    --scrollbar-vertical-size: 16px;
+    --scrollbar-horizontal-size: 16px;
+    --main-content-width: 496;
+    --left-sidebar-width: 288px;
+    --right-sidebar-width: 0px;
+    --sidebar-transition-duration: 0ms;
+    --content-spacing: clamp(16px, 16px + (var(--main-content-width) - 600)/424 * 8px, 24px);
+    --sidebar-transition-easing: cubic-bezier(0, 0, 0, 1);
 }
 
 * {

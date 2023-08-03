@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
-import Header from '~/layout/Components/Header';
-import Slice from '../Components/Slide/Slide';
+
+import './DeafultLayout.scss';
+
+import Slidebar from '../Components/Slidebar/Slidebar';
 function DefaultLayout({ children }) {
     return (
-        <div className="flex flex-col items-center ">
-            <div className="container">
-                <Header />
-                <div className="flex">
-                    <Slice />
-                    <div className="flex-1">{children}</div>
-                </div>
+        <div className="containers">
+            <Slidebar />
+            <div className=" ">
+                <div className="">{children}</div>
             </div>
         </div>
     );
