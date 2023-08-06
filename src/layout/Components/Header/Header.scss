@@ -1,0 +1,27 @@
+.div--search {
+    flex: 0 1 364px;
+}
+.div-search-- {
+    -webkit-box-align: center;
+
+    align-items: center;
+    bottom: 0;
+
+    display: flex;
+    left: 12px;
+    pointer-events: none;
+    position: absolute;
+    right: 12px;
+    top: 0;
+}
+.search {
+    background-color: #242424;
+    border: 0;
+    border-radius: 500px;
+    color: #fff !important;
+    height: 48px;
+    padding: 6px 36px;
+    text-overflow: ellipsis;
+    width: 100%;
+    outline: #b70808;
+}

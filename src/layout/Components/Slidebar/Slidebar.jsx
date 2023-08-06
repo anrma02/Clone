@@ -9,8 +9,8 @@ import { MenuItem } from './Menu';
 
 function Slidebar() {
     return (
-        <div className='"wrapper'>
-            <div className=" w-[250px] h-screen bg-black">
+        <div className="wrapper">
+            <div className="w-[250px] h-screen bg-black">
                 <div className="pt-[22px]">
                     <div>
                         <Link to={config.routes.home}>

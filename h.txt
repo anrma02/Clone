@@ -1,7 +1,0 @@
-.wrapper {
-    display: grid;
-    gap: var(--panel-gap);
-    margin-inline-end: var(--panel-gap);
-    height: 100%;
-}
-// de

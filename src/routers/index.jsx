@@ -9,8 +9,8 @@ import Search from '../pages/Search';
 // Public routes
 
 const publicRoutes = [
-     { path: config.routes.home, component: Home },
-     { path: config.routes.search, component: Search },
+    { path: config.routes.home, component: Home },
+    { path: config.routes.search, component: Search },
 ];
 
 const privateRoutes = [];
