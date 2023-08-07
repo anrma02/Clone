@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 
 import './DeafultLayout.scss';
-
 import Slidebar from '../Components/Slidebar/Slidebar';
 import Header from '../Components/Header/Header';
+import { SearchProvider } from '~/Context/SearchProvider';
 function DefaultLayout({ children }) {
     return (
         <div className="containers">
             <Slidebar />
-            <div className=" ">
+            <SearchProvider>
                 <div className="">
                     <Header />
                     {children}
                 </div>
-            </div>
+            </SearchProvider>
         </div>
     );
 }

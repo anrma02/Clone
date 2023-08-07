@@ -1,15 +1,17 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useCallback, useEffect, useState, useContext } from 'react';
+import axios from 'axios';
 
+import { SearchContext } from '~/Context/SearchProvider';
 import useDebounce from '~/hook/useDebounce';
 
 function SearchValue() {
-    const [searchResults, setSearchResults] = useState([]);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const searchContext = useContext(SearchContext);
+    const { setSearchResult } = searchContext;
     const location = useLocation();
     const isSearchPage = location.pathname === '/search';
 
@@ -18,7 +20,7 @@ function SearchValue() {
     const fetchAPI = useCallback(
         async function () {
             if (!debounceValue.trim()) {
-                setSearchResults([]);
+                setSearchResult([]);
                 return;
             }
             const options = {
@@ -40,6 +42,7 @@ function SearchValue() {
             try {
                 const response = await axios.request(options);
                 console.log(response.data);
+                setSearchResult(response.data);
             } catch (error) {
                 console.error(error);
             }
