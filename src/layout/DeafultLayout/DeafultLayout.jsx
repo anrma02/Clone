@@ -8,10 +8,11 @@ function DefaultLayout({ children }) {
     return (
         <div className="containers">
             <Slidebar />
+
             <SearchProvider>
-                <div className="">
+                <div className="wrapperss">
                     <Header />
-                    {children}
+                    <div className="wrapper-page">{children}</div>
                 </div>
             </SearchProvider>
         </div>

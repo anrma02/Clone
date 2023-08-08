@@ -1,64 +1,27 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useLocation } from 'react-router-dom';
-import { useCallback, useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import { useContext, useRef } from 'react';
 
+import '../Header/Header.scss';
 import { SearchContext } from '~/Context/SearchProvider';
-import useDebounce from '~/hook/useDebounce';
 
 function SearchValue() {
-    // const [loading, setLoading] = useState(false);
-    const [searchValue, setSearchValue] = useState('');
-    const searchContext = useContext(SearchContext);
-    const { setSearchResult } = searchContext;
+    const { setSearchResults, searchValue, loading, setSearchValue, handleSearch } = useContext(SearchContext);
     const location = useLocation();
+    const inputRef = useRef();
     const isSearchPage = location.pathname === '/search';
-
-    const debounceValue = useDebounce(searchValue, 700);
-
-    const fetchAPI = useCallback(
-        async function () {
-            if (!debounceValue.trim()) {
-                setSearchResult([]);
-                return;
-            }
-            const options = {
-                method: 'GET',
-                url: 'https://spotify23.p.rapidapi.com/search/',
-                params: {
-                    q: debounceValue,
-                    type: 'multi',
-                    offset: '0',
-                    limit: '10',
-                    numberOfTopResults: '5',
-                },
-                headers: {
-                    'X-RapidAPI-Key': '4338a4e59amsha573be8833d39f9p11eb67jsn281f9d6dc5cc',
-                    'X-RapidAPI-Host': 'spotify23.p.rapidapi.com',
-                },
-            };
-
-            try {
-                const response = await axios.request(options);
-                console.log(response.data);
-                setSearchResult(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        },
-        [debounceValue],
-    );
-
-    useEffect(() => {
-        fetchAPI();
-    }, [fetchAPI]);
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
         if (!searchValue.startsWith(' ')) {
             setSearchValue(searchValue);
         }
+    };
+    const handleClear = () => {
+        setSearchValue('');
+        setSearchResults([]);
+        inputRef.current.focus();
     };
 
     return (
@@ -71,10 +34,11 @@ function SearchValue() {
                                 role="search"
                                 onSubmit={(e) => {
                                     e.preventDefault();
-                                    fetchAPI();
+                                    handleSearch();
                                 }}
                             >
                                 <input
+                                    ref={inputRef}
                                     onChange={handleChange}
                                     value={searchValue}
                                     type="text"
@@ -83,10 +47,17 @@ function SearchValue() {
                                 />
                             </form>
                         </div>
-                        <div className="div-search--">
+                        <div className="icon-search">
                             <span>
-                                <FontAwesomeIcon className="text-white" icon={faSearch} />
+                                <FontAwesomeIcon className="text-white " icon={faSearch} />
                             </span>
+                        </div>
+                        <div className="icon-clear">
+                            {!!searchValue && !loading && (
+                                <button onClick={handleClear}>
+                                    <FontAwesomeIcon className="text-white" icon={faXmark} />{' '}
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
