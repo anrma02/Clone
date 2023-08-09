@@ -10,7 +10,7 @@ export const SearchProvider = ({ children }) => {
     const [searchResults, setSearchResults] = useState([]);
     const [searchType, setSearchType] = useState('multi');
     const [loading, setLoading] = useState(false);
-    const [availableTypes, setAvailableTypes] = useState([]);
+
     const [searchValue, setSearchValue] = useState('');
 
     const debounceValue = useDebounce(searchValue, 700);
@@ -26,7 +26,7 @@ export const SearchProvider = ({ children }) => {
                 url: 'https://spotify23.p.rapidapi.com/search/',
                 params: {
                     q: debounceValue,
-                    type: 'multi',
+                    type: 'albums',
                     offset: '0',
                     limit: '10',
                     numberOfTopResults: '5',
@@ -39,12 +39,12 @@ export const SearchProvider = ({ children }) => {
 
             try {
                 const response = await axios.request(options);
-                const results = response.data;
+                const results = response.data.albums?.items || [];
                 // setAvailableTypes(response.data.types);
 
                 console.log(results);
 
-                console.log('🚀 abc results:', response.data.types);
+                console.log('🚀 setSearchResults:', setSearchResults(results));
 
                 setSearchResults(results);
                 setLoading(false);
@@ -73,7 +73,6 @@ export const SearchProvider = ({ children }) => {
                 searchValue,
                 setSearchValue,
                 handleSearch,
-                availableTypes,
             }}
         >
             {children}
