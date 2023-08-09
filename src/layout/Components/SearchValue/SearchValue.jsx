@@ -17,6 +17,7 @@ function SearchValue() {
         if (!searchValue.startsWith(' ')) {
             setSearchValue(searchValue);
         }
+        handleSearch();
     };
     const handleClear = () => {
         setSearchValue('');

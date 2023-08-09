@@ -10,10 +10,9 @@ export const SearchProvider = ({ children }) => {
     const [searchResults, setSearchResults] = useState([]);
     const [searchType, setSearchType] = useState('multi');
     const [loading, setLoading] = useState(false);
-
     const [searchValue, setSearchValue] = useState('');
-
     const debounceValue = useDebounce(searchValue, 700);
+
     const handleSearch = useCallback(
         async function () {
             if (!debounceValue.trim()) {
@@ -26,10 +25,7 @@ export const SearchProvider = ({ children }) => {
                 url: 'https://spotify23.p.rapidapi.com/search/',
                 params: {
                     q: debounceValue,
-                    type: 'albums',
-                    offset: '0',
-                    limit: '10',
-                    numberOfTopResults: '5',
+                    type: searchType,
                 },
                 headers: {
                     'X-RapidAPI-Key': '4338a4e59amsha573be8833d39f9p11eb67jsn281f9d6dc5cc',
@@ -39,14 +35,15 @@ export const SearchProvider = ({ children }) => {
 
             try {
                 const response = await axios.request(options);
-                const results = response.data.albums?.items || [];
-                // setAvailableTypes(response.data.types);
+                const results = response.data[`${searchType}s`]?.items || [];
+                const data = response.data || [];
 
-                console.log(results);
-
-                console.log('🚀 setSearchResults:', setSearchResults(results));
+                console.log('🚀 multi:', data);
+                console.log('🚀 Albums:', results);
 
                 setSearchResults(results);
+                setSearchResults(data);
+
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
@@ -54,7 +51,7 @@ export const SearchProvider = ({ children }) => {
                 setSearchResults(null);
             }
         },
-        [debounceValue],
+        [debounceValue, searchType],
     );
 
     useEffect(() => {
