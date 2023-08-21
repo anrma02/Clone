@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-
 import PropTypes from 'prop-types';
+
+import './Tabs.scss';
 function Tabs({ tabs, onChange, activeTab }) {
     return (
         <div>

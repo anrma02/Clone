@@ -1,4 +1,6 @@
 import { useContext, useState } from 'react';
+
+import './Search.scss';
 import { SearchContext } from '~/Context/SearchProvider';
 import Tabs from './Tabs/Tabs';
 import ArtistList from './Tabs/ArtistList';
@@ -9,36 +11,40 @@ import PodcastList from './Tabs/PodcastList';
 import UserList from './Tabs/UserList';
 
 function Search() {
-    const { searchResults, searchType, setSearchType } = useContext(SearchContext);
+    const { searchResults, searchValue, searchType, setSearchType } = useContext(SearchContext);
     const [activeTab, setActiveTab] = useState(0);
     const tabs = [
         { id: 1, label: 'Nghệ sĩ', value: 'artist' },
-        { id: 2, label: 'Album', value: 'album' },
-        { id: 3, label: 'Playlist', value: 'playlist' },
-        { id: 3, label: 'Bài hát', value: 'track' },
-        { id: 5, label: 'Podcast', value: 'podcast' },
-        { id: 6, label: 'User', value: 'user' },
+        { id: 2, label: 'Bài hát', value: 'track' },
+        { id: 3, label: 'Album', value: 'album' },
+        { id: 4, label: 'Podcast và chương trình', value: 'podcast' },
+        { id: 5, label: 'Playlist', value: 'playlist' },
+        { id: 6, label: 'Hồ sơ', value: 'user' },
     ];
 
     return (
         <div className="text-red-800">
-            <div>
-                <Tabs
-                    tabs={tabs}
-                    activeTab={activeTab}
-                    onChange={(index) => {
-                        setActiveTab(index);
-                        setSearchType(tabs[index].value);
-                    }}
-                    searchType={searchType}
-                />
-                {searchType === 'artist' && <ArtistList data={searchResults} />}
-                {searchType === 'album' && <AlbumsList data={searchResults} />}
-                {searchType === 'playlist' && <PlayList data={searchResults} />}
-                {searchType === 'track' && <TrackList data={searchResults} />}
-                {searchType === 'podcast' && <PodcastList data={searchResults} />}
-                {searchType === 'user' && <UserList data={searchResults} />}
-            </div>
+            {searchValue && (
+                <div className="tab">
+                    <div className="tab-grid">
+                        <Tabs
+                            tabs={tabs}
+                            activeTab={activeTab}
+                            onChange={(index) => {
+                                setActiveTab(index);
+                                setSearchType(tabs[index].value);
+                            }}
+                            searchType={searchType}
+                        />
+                        {searchType === 'artist' && <ArtistList data={searchResults} />}
+                        {searchType === 'album' && <AlbumsList data={searchResults} />}
+                        {searchType === 'playlist' && <PlayList data={searchResults} />}
+                        {searchType === 'track' && <TrackList data={searchResults} />}
+                        {searchType === 'podcast' && <PodcastList data={searchResults} />}
+                        {searchType === 'user' && <UserList data={searchResults} />}
+                    </div>
+                </div>
+            )}
 
             <h2>Search Results</h2>
             {Array.isArray(searchResults) &&
