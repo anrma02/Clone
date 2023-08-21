@@ -25,19 +25,18 @@ function SearchValue() {
         inputRef.current.focus();
     };
 
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        handleSearch();
+    };
+
     return (
         <div>
             {isSearchPage && (
                 <div className="absolute left-[5rem] top-[-6px] w-[370px]">
                     <div className="flex">
                         <div className="div--search">
-                            <form
-                                role="search"
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    handleSearch();
-                                }}
-                            >
+                            <form role="search" onSubmit={handleSearchSubmit}>
                                 <input
                                     ref={inputRef}
                                     onChange={handleChange}

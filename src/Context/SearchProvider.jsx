@@ -8,11 +8,12 @@ export const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
     const [searchResults, setSearchResults] = useState([]);
-    const [searchType, setSearchType] = useState('multi');
+    const [searchType, setSearchType] = useState();
     const [loading, setLoading] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const debounceValue = useDebounce(searchValue, 700);
-
+    const [activeTab, setActiveTab] = useState(0);
+    const [albumsData, setAlbumsData] = useState([]);
     const handleSearch = useCallback(
         async function () {
             if (!debounceValue.trim()) {
@@ -28,22 +29,16 @@ export const SearchProvider = ({ children }) => {
                     type: searchType,
                 },
                 headers: {
-                    'X-RapidAPI-Key': '4338a4e59amsha573be8833d39f9p11eb67jsn281f9d6dc5cc',
+                    'X-RapidAPI-Key': 'e344eb3d49msh3733906f6abb5dap1b5c8cjsnd7b0a7420119',
                     'X-RapidAPI-Host': 'spotify23.p.rapidapi.com',
                 },
             };
-
             try {
                 const response = await axios.request(options);
                 const results = response.data[`${searchType}s`]?.items || [];
-                const data = response.data || [];
-
-                console.log('🚀 multi:', data);
-                console.log('🚀 Albums:', results);
+                console.log('🚀 :', results);
 
                 setSearchResults(results);
-                setSearchResults(data);
-
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
@@ -70,6 +65,10 @@ export const SearchProvider = ({ children }) => {
                 searchValue,
                 setSearchValue,
                 handleSearch,
+                activeTab,
+                setActiveTab,
+                albumsData,
+                setAlbumsData,
             }}
         >
             {children}
