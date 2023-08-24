@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 
-function ArtistList({ data }) {
+function UserList({ data }) {
     return (
         <div>
             {data.map((item, index) => (
-                <div key={index}>{item.name}</div>
+                <div key={index}>{item.data.displayName}</div>
             ))}
         </div>
     );
 }
 
-ArtistList.propTypes = {
+UserList.propTypes = {
     data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
 };
 
-export default ArtistList;
+export default UserList;

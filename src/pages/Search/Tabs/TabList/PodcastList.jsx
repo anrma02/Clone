@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
 
-function AlbumsList({ data }) {
+function PodcastList({ data }) {
     return (
         <div>
-            {data.map((album, index) => (
+            {data.map((item, index) => (
                 <div key={index}>
-                    <h2>{album.name}</h2>
-                    {/* Other album information */}
+                    <div>{item.data.name}</div>
+                    <p>MediaType: {item.data.mediaType}</p>
                 </div>
             ))}
         </div>
     );
 }
 
-AlbumsList.propTypes = {
+PodcastList.propTypes = {
     data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
 };
 
-export default AlbumsList;
+export default PodcastList;
