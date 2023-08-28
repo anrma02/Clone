@@ -1,0 +1,18 @@
+.tables {
+    background: var(--background-highlight);
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+    -webkit-box-shadow: 0 -1px 0 0 #181818;
+    box-shadow: 0 -1px 0 0 #181818;
+    height: 36px;
+    font-size: 16px;
+    font-weight: 500;
+    display: grid;
+    color: #dedede;
+    align-items: center;
+}
+.table-grid {
+    display: grid;
+    grid-template-columns: [index] 34px [first] 4fr [var1] 2fr [last] minmax(120px, 1fr);
+
+    padding: 0 40px;
+}

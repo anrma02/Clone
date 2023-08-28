@@ -25,7 +25,7 @@ function Search() {
     ];
 
     return (
-        <div className="text-red-800">
+        <div>
             {searchValue && (
                 <div className="tab">
                     <div className="tab-grid">
@@ -38,11 +38,11 @@ function Search() {
                             }}
                             searchType={searchType}
                         />
-                        <div>
+                        <div className="w-full ">
                             {searchType === 'artist' && <ArtistList data={searchResults} />}
                             {searchType === 'album' && <AlbumsList data={searchResults} />}
                             {searchType === 'playlist' && <PlayList data={searchResults} />}
-                            {searchType === 'track' && <TrackList trackData={searchResults} />}
+                            {searchType === 'track' && <TrackList data={searchResults} />}
                             {searchType === 'podcast' && <PodcastList data={searchResults} />}
                             {searchType === 'user' && <UserList data={searchResults} />}
                             {searchType === 'genre' && <GenresList data={searchResults} />}
@@ -50,8 +50,6 @@ function Search() {
                     </div>
                 </div>
             )}
-
-            <h2>Search Results</h2>
         </div>
     );
 }

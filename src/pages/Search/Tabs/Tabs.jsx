@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Tabs.scss';
 function Tabs({ tabs, onChange, activeTab }) {
     return (
-        <div>
+        <div className="px-6">
             {tabs.map((tab, index) => (
                 <button
                     key={index}
