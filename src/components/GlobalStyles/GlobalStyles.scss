@@ -54,7 +54,6 @@ html {
 body {
     font-size: 1.6rem;
     line-height: 1.5;
-    text-rendering: optimizespeed;
 
     overflow-y: overlay;
 }
@@ -62,7 +61,7 @@ body {
 // Scrollbar CSS
 html *::-webkit-scrollbar {
     border-radius: 0;
-    width: 8px;
+    width: 4px;
 }
 
 html *::-webkit-scrollbar-thumb {

@@ -14,6 +14,7 @@ export const SearchProvider = ({ children }) => {
     const debounceValue = useDebounce(searchValue, 700);
     const [activeTab, setActiveTab] = useState(0);
     const [albumsData, setAlbumsData] = useState([]);
+
     const handleSearch = useCallback(
         async function () {
             if (!debounceValue.trim()) {
@@ -39,6 +40,7 @@ export const SearchProvider = ({ children }) => {
                 console.log('🚀 :', results);
 
                 setSearchResults(results);
+
                 setLoading(false);
             } catch (error) {
                 setLoading(false);

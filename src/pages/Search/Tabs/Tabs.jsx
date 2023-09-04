@@ -27,6 +27,5 @@ Tabs.propTypes = {
         }),
     ).isRequired,
     onChange: PropTypes.func.isRequired,
-    searchType: PropTypes.string.isRequired,
 };
 export default Tabs;

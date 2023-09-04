@@ -1,4 +1,5 @@
 .containers {
+    overflow: hidden;
     background: #000000;
     display: grid;
     height: 100%;
@@ -17,7 +18,8 @@
     grid-template-rows: 1fr auto;
 }
 .wrapperss {
-    position: relative;
+    top: 0;
+    z-index: 10;
     display: block;
     left: 8px;
     padding: 0 6px;
