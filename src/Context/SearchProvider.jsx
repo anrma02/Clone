@@ -8,12 +8,12 @@ export const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
     const [searchResults, setSearchResults] = useState([]);
-    const [searchType, setSearchType] = useState();
+    const [searchType, setSearchType] = useState('tracks');
     const [loading, setLoading] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const debounceValue = useDebounce(searchValue, 700);
-    const [activeTab, setActiveTab] = useState(0);
-    const [albumsData, setAlbumsData] = useState([]);
+    const [offset, setOffset] = useState();
+    const limit = 10;
 
     const handleSearch = useCallback(
         async function () {
@@ -28,9 +28,11 @@ export const SearchProvider = ({ children }) => {
                 params: {
                     q: debounceValue,
                     type: searchType,
+                    offset: offset,
+                    limit: limit,
                 },
                 headers: {
-                    'X-RapidAPI-Key': 'e344eb3d49msh3733906f6abb5dap1b5c8cjsnd7b0a7420119',
+                    'X-RapidAPI-Key': '5d490ea77amsh1c27755ac3b1a24p136b27jsnea8e99fb0bdf',
                     'X-RapidAPI-Host': 'spotify23.p.rapidapi.com',
                 },
             };
@@ -39,7 +41,12 @@ export const SearchProvider = ({ children }) => {
                 const results = response.data[`${searchType}s`]?.items || [];
                 console.log('🚀 :', results);
 
-                setSearchResults(results);
+                if (offset === 0) {
+                    setSearchResults(results);
+                } else {
+                    setSearchResults((prevResults) => [...prevResults, ...results]);
+                }
+                setOffset(offset + limit);
 
                 setLoading(false);
             } catch (error) {
@@ -67,10 +74,6 @@ export const SearchProvider = ({ children }) => {
                 searchValue,
                 setSearchValue,
                 handleSearch,
-                activeTab,
-                setActiveTab,
-                albumsData,
-                setAlbumsData,
             }}
         >
             {children}

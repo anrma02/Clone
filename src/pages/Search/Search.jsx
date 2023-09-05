@@ -39,7 +39,7 @@ function Search() {
                             searchType={searchType}
                         />
                         <div className="w-full ">
-                            {searchType === 'artist' && <ArtistList data={searchResults} />}
+                            {searchType === 'artist' && <ArtistList data={searchResults} loadMore={loadMore} />}
                             {searchType === 'album' && <AlbumsList data={searchResults} />}
                             {searchType === 'playlist' && <PlayList data={searchResults} />}
                             {searchType === 'track' && <TrackList data={searchResults} />}
