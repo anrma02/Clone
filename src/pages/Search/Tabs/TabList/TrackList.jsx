@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faPlay } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import { useCallback, useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import './Tablist.scss';
 import { SearchContext } from '~/Context/SearchProvider';
@@ -21,23 +21,36 @@ function millisecondsToMinutesAndSeconds(milliseconds) {
 function TrackList({ data }) {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const { handleSearch } = useContext(SearchContext);
+    const [isFetching, setIsFetching] = useState(false);
 
-    const handleLoadMore = useCallback(() => {
-        handleSearch();
-    }, [handleSearch]);
+    // Hàm xử lý sự kiện cuộn
+    const handleScroll = useContext(function () {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
 
-    const handleScroll = useCallback(
-        (e) => {
-            const { scrollTop, clientHeight, scrollHeight } = e.target;
-            if (scrollHeight - scrollTop === clientHeight) {
-                handleLoadMore();
-            }
-        },
-        [handleLoadMore],
-    );
+        if (windowHeight + scrollTop >= documentHeight - 100 && !isFetching) {
+            setIsFetching(true);
+        }
+    }, []);
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [handleScroll]);
+
+    // Xử lý cuộn cuối cùng và tải thêm dữ liệu
+    useEffect(() => {
+        if (isFetching) {
+            handleSearch().then(() => {
+                setIsFetching(false);
+            });
+        }
+    }, [isFetching, handleSearch]);
 
     return (
-        <div className="main" onScroll={handleScroll} style={{ height: '400px', overflowY: 'auto' }}>
+        <div className="main" style={{ height: '520px', overflowY: 'auto' }}>
             <div className="tables">
                 <div className="table-grid">
                     <div>#</div>
@@ -92,8 +105,10 @@ function TrackList({ data }) {
                                 alt=""
                             />
                             <div className="ml-[16px]">
-                                <div className="flex items-center font-semibold "> {item.data?.name}</div>
-                                <span className="flex items-center text-[14px] text-[#B3B3B3] font-medium "></span>
+                                <div className="flex items-center font-semibold text-white "> {item.data?.name}</div>
+                                <span className="flex items-center text-[14px] text-[#dedede] font-medium ">
+                                    {item.data.artists?.items[0]?.profile?.name}
+                                </span>
                             </div>
                         </div>
                         <div className="flex text-[#B3B3B3] font-medium">{item.data.albumOfTrack?.name}</div>

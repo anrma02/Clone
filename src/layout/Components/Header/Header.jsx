@@ -87,7 +87,7 @@ function Header() {
             {/* acc */}
 
             {account ? (
-                <div>
+                <>
                     <Tippy
                         visible={visible}
                         placement="bottom"
@@ -119,7 +119,7 @@ function Header() {
                             />
                         </div>
                     </Tippy>
-                </div>
+                </>
             ) : (
                 <div>login</div>
             )}

@@ -55,12 +55,22 @@ export const SearchProvider = ({ children }) => {
                 setSearchResults(null);
             }
         },
-        [debounceValue, searchType],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [debounceValue, searchType, offset],
     );
+    useEffect(() => {
+        if (offset > 0) {
+            handleSearch().then((newResults) => {
+                if (newResults.length > 0) {
+                    setSearchResults((prevResults) => [...prevResults, ...newResults]);
+                }
+            });
+        }
+    }, [offset, handleSearch]);
 
     useEffect(() => {
-        handleSearch();
-    }, [handleSearch]);
+        handleSearch(); // Ban đầu, tải kết quả ban đầu khi searchValue hoặc searchType thay đổi.
+    }, [handleSearch, searchValue, searchType]);
 
     return (
         <SearchContext.Provider
