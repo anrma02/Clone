@@ -1,30 +1,40 @@
 .containers {
-    overflow: hidden;
-    background: #000000;
+    --main-view-top-bar-grid-area-z-index: 2;
+    --left-sidebar-grid-area-z-index: 4;
+    --above-everything-except-now-playing-bar-z-index: 5;
+    --above-main-and-now-playing-view-grid-area: 6;
+    --now-playing-bar-grid-area-z-index: calc(var(--above-everything-except-now-playing-bar-z-index) + 1);
+    background-color: #000;
     display: grid;
+    gap: var(--panel-gap);
+    grid-template-areas:
+        'left-sidebar main-view  footer'
+        'now-playing-bar now-playing-bar now-playing-bar';
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
     height: 100%;
     min-height: 100%;
     padding: var(--panel-gap);
     position: relative;
-    row-gap: var(--panel-gap);
-    transition:
-        grid-template-columns var(--sidebar-transition-duration) var(--sidebar-transition-easing),
-        -ms-grid-columns var(--sidebar-transition-duration) var(--sidebar-transition-easing);
     width: 100%;
-    grid-template-areas:
-        'left-sidebar main-view right-sidebar'
-        'now-playing-bar now-playing-bar now-playing-bar';
-    grid-template-columns: var(--left-sidebar-width) 1fr var(--right-sidebar-width);
-    grid-template-rows: 1fr auto;
+    height: 100vh;
 }
 .wrapperss {
     top: 0;
-    z-index: 10;
+
     display: block;
     left: 8px;
     padding: 0 6px;
+    overflow-y: auto;
 }
 .wrapper-page {
     flex: 1;
     max-height: calc(((100vh - 64px) - 90px) - 520px);
+}
+.footer {
+    grid-area: now-playing-bar;
+    width: 100%;
+    z-index: var(--now-playing-bar-grid-area-z-index);
+
+    background-color: rgb(127, 128, 128);
 }
