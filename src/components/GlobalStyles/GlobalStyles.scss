@@ -1,16 +1,48 @@
 :root {
+    --column-width: 185px;
+    --column-count: 6;
+    --grid-gap: 24px;
+    --min-container-width: 372px;
     --black: #000;
-    --white: #ffffff;
-    --text-color: #ffffff;
+    --white: #e7e7e7;
+    --text-color: #e7e7e7;
     --panel-gap: 8px;
     --scrollbar-vertical-size: 16px;
     --scrollbar-horizontal-size: 16px;
     --main-content-width: 496;
-    --left-sidebar-width: 288px;
+    --left-sidebar-width: 250px;
     --right-sidebar-width: 0px;
     --sidebar-transition-duration: 0ms;
     --content-spacing: clamp(16px, 16px + (var(--main-content-width) - 600)/424 * 8px, 24px);
     --sidebar-transition-easing: cubic-bezier(0, 0, 0, 1);
+    --background-base: #161616a1;
+    --background-highlight: #1a1a1a;
+    --background-press: #000;
+    --background-elevated-base: #242424;
+    --background-elevated-highlight: #2a2a2a;
+    --background-elevated-press: #000;
+    --background-tinted-base: hsla(0, 0%, 100%, 0.07);
+    --background-tinted-highlight: hsla(0, 0%, 100%, 0.1);
+    --background-tinted-press: hsla(0, 0%, 100%, 0.04);
+    --background-unsafe-for-small-text-base: #121212;
+    --background-unsafe-for-small-text-highlight: #121212;
+    --background-unsafe-for-small-text-press: #121212;
+    --text-base: #fff;
+    --text-subdued: #a7a7a7;
+    --text-bright-accent: #1ed760;
+    --text-negative: #f15e6c;
+    --text-warning: #ffa42b;
+    --text-positive: #1ed760;
+    --text-announcement: #3d91f4;
+    --essential-base: #fff;
+    --essential-subdued: #727272;
+    --essential-bright-accent: #1ed760;
+    --essential-negative: #e91429;
+    --essential-warning: #ffa42b;
+    --essential-positive: #1ed760;
+    --essential-announcement: #0d72ea;
+    --decorative-base: #fff;
+    --decorative-subdued: #292929;
 }
 
 * {
@@ -26,7 +58,6 @@ html {
 body {
     font-size: 1.6rem;
     line-height: 1.5;
-    text-rendering: optimizespeed;
 
     overflow-y: overlay;
 }
@@ -34,7 +65,7 @@ body {
 // Scrollbar CSS
 html *::-webkit-scrollbar {
     border-radius: 0;
-    width: 8px;
+    width: 4px;
 }
 
 html *::-webkit-scrollbar-thumb {
@@ -50,7 +81,7 @@ html *::-webkit-scrollbar-track {
 button,
 input,
 [tabindex] {
-    outline: none;
+    // outline: none;
     border: none;
 }
 

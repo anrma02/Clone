@@ -1,6 +1,10 @@
 .wrapper {
-    display: grid;
-    gap: var(--panel-gap);
-    margin-inline-end: var(--panel-gap);
-    height: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 0;
 }

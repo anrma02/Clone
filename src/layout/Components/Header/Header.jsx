@@ -66,7 +66,7 @@ function Header() {
     ];
 
     return (
-        <div className="relative">
+        <div className="wrappers">
             {/* icon */}
 
             <div className="absolute w-[40px]  rounded-full h-[40px] left-[40px] top-5 opacity-50 bg-black">
@@ -87,7 +87,7 @@ function Header() {
             {/* acc */}
 
             {account ? (
-                <div>
+                <>
                     <Tippy
                         visible={visible}
                         placement="bottom"
@@ -119,7 +119,7 @@ function Header() {
                             />
                         </div>
                     </Tippy>
-                </div>
+                </>
             ) : (
                 <div>login</div>
             )}

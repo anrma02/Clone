@@ -1,27 +1,39 @@
+.wrappers {
+    position: sticky;
+    height: 64px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    max-width: 1255px;
+    background: #1616169c;
+    padding: 16px 24px;
+}
 .div--search {
     flex: 0 1 364px;
 }
-.div-search-- {
+.icon-search,
+.icon-clear {
     -webkit-box-align: center;
-
     align-items: center;
     bottom: 0;
-
     display: flex;
-    left: 12px;
-    pointer-events: none;
     position: absolute;
-    right: 12px;
     top: 0;
+}
+
+.icon-search {
+    pointer-events: none;
+    left: 12px;
+}
+.icon-clear {
+    right: 30px;
 }
 .search {
     background-color: #242424;
     border: 0;
     border-radius: 500px;
-    color: #fff !important;
+    color: white !important;
     height: 48px;
-    padding: 6px 36px;
+    padding: 6px 40px;
     text-overflow: ellipsis;
     width: 100%;
-    outline: #b70808;
 }
